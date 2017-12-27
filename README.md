@@ -1,4 +1,6 @@
-# Coursera Data Science Capstone Project- This repository contains arificats related with Coursera Data Science Capstone Project
+# Coursera Data Science Capstone Project
+
+- This repository contains arificats related with Coursera Data Science Capstone Project
 
 - Slides for the application can be located at http://rpubs.com/suwaldilip/DS_CapstoneProject
 - Shiny Application can be located at https://dsuwal.shinyapps.io/predict_next_word/
