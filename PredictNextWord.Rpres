@@ -1,0 +1,74 @@
+Coursera Capstone Project: Predict Next Word
+========================================================
+author: Dilip Suwal
+date: 12/27/2017
+autosize: true
+width: 1800
+height: 1400
+
+Introduction
+========================================================
+This presentation will describe a shiny product to predict the next word based on the Kate Back-off prediction algorithm using sequence of words provided by a user. This is the Capstone Project for Coursera Data Science Specialization course.
+
+In order to build the next word predictive model, three data sets that include twitter, news and blogs data sets have been used to train the model. various data cleaning and sampling processes are applied to finalize the training data set. Using natural language processing approach, various word combinations commonly known as N-Grams are then created using training data set and the predictive algorithm is applied to predict next word. Finally, shiny application has been developed incorporating this predictive model to predict the next word.
+
+Cleaning and building N-Grams
+========================================================
+Following steps have been performed to clean the twitter, news and blogs data sets before building word prediction algorithm and then Shiny application.
+
+- A random data sampling is done on each of three data sets to form the three subsets and then they are merged into one.The final combined subset is 3% of all three data sets and represents the whole huge data sets.
+
+- Data cleaning operation is performed on the sampling data. The cleaning process includes converting to lower case, removing punctuation, numbers and non printable characters.
+
+- After cleaning operation, four sets of word combinations with 4-words, 3-words, 2-words, and 1-word are created. These combination of words are commonly known as N-Grams. Here 4-words, 3-words, 2-words, and 1-word are called as tetra-gram, tree-gram, bi-gram and uni-gram respectively.
+
+- Now the frequency of occurrence of each combination of words in each N-Gram is calculated and based on this cumulative frequencies, n-grams are sorted.
+
+- In order to reduce data size for optimum performance, low frequency n-grams are further filtered out.
+
+- After then, the four n-gram data sets are saved as R-Compressed files.These compressed file will be loaded during the execution of the Shiny application.
+
+
+Next Word Prediction Model
+========================================================
+After cleaning and building N-grams, next word prediction model is developed based on the Kate Back-off algorithm. Here are the the steps to implement the Back-Off model.
+
+- Load four R-Compressed files prepared during cleaning and building N-Grams.
+
+- Clean the user input which is the sequence of words by using same techniques used to clean the training data sets.
+
+- Extract last three or last two or the last one word depending upon the number of words given by the user.
+
+- Let us suppose, if three words are extracted from the user input, match the combination of these three words with the first three words in 4-gram. If the combination is found in the 4-gram, the fourth word in the 4-gram will be predicted word.
+
+- If there is no match in 4-gram, back-off to 3-gram. Match the last two words of the user input with the first two words of 3-gram. If the last two words of the user input is found in the 3-gram, the third word in the 3-gram will be predicted word.
+
+- If there is no match in 3-gram, back-off to 2-gram. Match the last word of the user input with the first word of 2-gram. If the last word of the user input is found in the 2-gram, the second word in the 2-gram will be predicted word.
+
+- If there is no match in 2-gram, back-off to 1-gram. the most frequent word from 1-gram will be the predicted word.
+
+Shiny Application
+========================================================
+A Shiny application is developed using word prediction model described in the last slide. Following is the application interface and steps to predict the next word.
+
+![alt text](PredApp.PNG)
+
+- Enter a sequence of words without a last word in the text box, then press the "Predict Word" button.
+
+- The application then predicts the last word omitted by user and is displayed just below the text "The predicted next word is".
+
+Links to Shiny application and codes
+========================================================
+
+- The link to the "Predict Next Word" Shiny application is [<b>Here</b>](https://dsuwal.shinyapps.io/predict_next_word/)
+
+- Followings are the codes related to this project and can be located [<b>Here</b>] (https://github.com/dilipsuwal/DataScienceCapstoneProject). Please open it in new window.
+
+  - Prepare_NGrams_DataSets.R --> This code loads three given data sets, cleans them, builds n-grams and then builds compressed R data sets for n-grams.
+  
+  
+  - ui.R and server.R --> These codes build application inteface and include logics behind predicting next word.
+  
+  
+  - PredictNextWord.Rpres --> This is the code to create the slides.
+
